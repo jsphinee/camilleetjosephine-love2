@@ -155,23 +155,16 @@ h2, h3, .contact-label, .contact-value, .nav-links a, .nav-mark,
 .pill-btn:hover { background: var(--blue); color: var(--pink); }
 
 .cloud-photos {
-  max-width: 720px;
+  max-width: 760px;
   margin: 30px auto 0;
-  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.cloud-photo {
-  width: 46%;
-  max-width: 320px;
-  height: auto;
-}
-.cloud-photo-1 { width: 56%; max-width: 360px; margin-bottom: -8%; z-index: 2; }
-.cloud-photo-2 { margin-right: -6%; margin-top: 4%; }
-.cloud-photo-3 { margin-left: -6%; margin-top: 4%; }
+.cloud-photo { width: 42%; max-width: 300px; height: auto; }
+.cloud-photo-1 { width: 100%; max-width: 340px; }
 
 /* ===== Sections ===== */
 .section {
