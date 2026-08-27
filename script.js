@@ -84,7 +84,14 @@ function wireReponseToggle(container, prefix) {
   });
 }
 
+// Met en forme "jean-pierre dupont" -> "Jean-Pierre Dupont"
+function titleCase(str) {
+  return (str || '').toLowerCase().replace(/(^|[\s-])(\p{L})/gu, (m, sep, letter) => sep + letter.toUpperCase());
+}
+
 function updateContactProfileName() {
+  contactFirstname.value = titleCase(contactFirstname.value);
+  contactLastname.value = titleCase(contactLastname.value);
   const firstname = contactFirstname.value.trim();
   const lastname = contactLastname.value.trim();
   contactProfileName.textContent = (firstname + ' ' + lastname).trim() || 'Vous';
@@ -200,6 +207,8 @@ function addGuestCard(firstname, lastname, manual) {
   wireReponseToggle(card, prefix);
 
   if (manual) {
+    card.querySelector(`.${prefix}-firstname`).addEventListener('blur', (e) => { e.target.value = titleCase(e.target.value); });
+    card.querySelector(`.${prefix}-lastname`).addEventListener('blur', (e) => { e.target.value = titleCase(e.target.value); });
     card.querySelector('.remove-guest-btn').addEventListener('click', () => {
       card.remove();
       addedGuests[id] = null; // conserve les index des autres cartes
