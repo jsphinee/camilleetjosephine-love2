@@ -34,6 +34,7 @@ updateWave();
 const form = document.getElementById('rsvpForm');
 const formNote = document.getElementById('formNote');
 const hiddenFrame = document.getElementById('hiddenRsvpFrame');
+const submitBtn = form.querySelector('button[type="submit"]');
 let rsvpSubmitted = false;
 
 // --- RSVP dynamic fields ---
@@ -51,6 +52,7 @@ let lastMembers = [];
 let manualCounter = 0;
 
 const PROFILE_OPTIONS = `
+  <option value="" selected disabled>— Choisir —</option>
   <option value="Adulte - Omnivore">Adulte - Omnivore</option>
   <option value="Adulte - Végétarien">Adulte - Végétarien</option>
   <option value="Enfant - Omnivore">Enfant - Omnivore</option>
@@ -71,7 +73,7 @@ function reponseControlHtml(prefix) {
     </div>
     <div class="form-row ${prefix}-profile-wrapper" hidden>
       <label>Profil</label>
-      <select class="${prefix}-profile">${PROFILE_OPTIONS}</select>
+      <select class="${prefix}-profile" required>${PROFILE_OPTIONS}</select>
     </div>
   `;
 }
@@ -288,8 +290,13 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     return;
   }
+  if (rsvpSubmitted) {
+    event.preventDefault();
+    return; // envoi déjà en cours, on ignore les clics supplémentaires
+  }
   injectHiddenGuestFields();
   rsvpSubmitted = true;
+  submitBtn.disabled = true;
   formNote.textContent = 'Envoi en cours…';
   formNote.style.color = '#1b5a5a';
   // Let the browser submit the form normally into the hidden iframe.
@@ -297,6 +304,7 @@ form.addEventListener('submit', (event) => {
 
 hiddenFrame.addEventListener('load', () => {
   if (!rsvpSubmitted) return; // ignore the iframe's initial blank load
+  submitBtn.disabled = false;
   formNote.textContent = 'Merci, votre réponse a bien été envoyée ! 🎉';
   formNote.style.color = '#1b5a5a';
   form.reset();
