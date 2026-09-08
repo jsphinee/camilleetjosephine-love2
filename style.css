@@ -112,7 +112,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
   padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px) clamp(40px, 6vw, 70px);
 }
-.hero-rings { width: min(480px, 80%); margin: 0 auto 20px; }
+.hero-rings { width: min(720px, 80%); margin: 0 auto 20px; }
 .hero-names {
   font-size: clamp(3.2rem, 9vw, 6rem);
   line-height: 1;
@@ -264,10 +264,6 @@ img { max-width: 100%; display: block; }
   max-width: 440px;
   width: 100%;
   margin: 30px auto 0;
-  border-radius: 18px;
-  border: 2px solid var(--blue);
-  box-shadow: 8px 8px 0 var(--blue);
-  transform: rotate(-1deg);
 }
 
 /* ===== FAQ ===== */
