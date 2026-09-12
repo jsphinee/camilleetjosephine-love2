@@ -9,23 +9,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ===== Tokens — palette claire et solaire, touches de bleu vieilli ===== */
+/* ===== Tokens — version punchy, plus de bleu vieilli, blocs de couleur francs ===== */
 :root {
   --cream: #FFFBF4;
+
+  --peach-bold: #F7CDA6;
+  --golden-bold: #F0BE7C;
+  --blush-bold: #EFC2B6;
+  --copper-bold: #C4694A;
+  --footer-bold: #F0BE7C;
+
   --peach-wash: #FBEADC;
-  --golden-wash: #FCEFDA;
-  --apricot-wash: #FBE3D0;
 
   --ink: #6B4030;
   --copper: #C06A4D;
-  --copper-deep: #9A4E37;
+  --copper-deep: #8C4530;
   --peach: #F4C7A7;
-  --apricot: #EBB189;
-  --golden: #EAAE5E;
-  --blush: #E9B3A8;
 
   --dusty-blue: #A8C2D9;
-  --dusty-blue-deep: #7FA1BD;
+  --dusty-blue-bold: #8FB2CF;
+  --dusty-blue-deep: #5F86A6;
 
   --font-script: 'Caveat', cursive;
   --font-display: 'Fraunces', serif;
@@ -62,12 +65,18 @@ img { max-width: 100%; display: block; }
 .scroll-wave svg { width: 100%; height: 100%; }
 .scroll-wave path {
   fill: none;
-  stroke: var(--copper);
+  stroke: var(--dusty-blue-deep);
   stroke-width: 6;
   stroke-dasharray: 1400;
   stroke-dashoffset: 1400;
   transition: stroke-dashoffset 0.1s linear;
 }
+
+/* ===== Séparateurs en vague entre sections ===== */
+.wave-divider { line-height: 0; }
+.wave-divider svg { width: 100%; height: 50px; display: block; }
+.wave-divider path { fill: currentColor; }
+.wave-divider.flip { transform: rotate(180deg); }
 
 /* ===== Animations d'entrée ===== */
 @keyframes fadeInUp {
@@ -105,12 +114,12 @@ img { max-width: 100%; display: block; }
   padding: 14px clamp(20px, 5vw, 56px);
   background: rgba(255, 251, 244, 0.92);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(192, 106, 77, 0.15);
+  border-bottom: 2px solid var(--dusty-blue-deep);
 }
 .nav-mark {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--copper-deep);
 }
 .nav-links {
@@ -124,17 +133,18 @@ img { max-width: 100%; display: block; }
 .nav-links a {
   text-decoration: none;
   color: var(--copper-deep);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.9rem;
   transition: color 0.2s ease;
 }
-.nav-links a:hover { color: var(--copper); }
+.nav-links a:hover { color: var(--dusty-blue-deep); }
 .nav-cta {
-  background: var(--copper);
-  color: var(--cream) !important;
-  padding: 8px 18px;
+  background: var(--dusty-blue-deep);
+  color: #fff !important;
+  padding: 8px 20px;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 var(--copper-bold);
 }
 .nav-cta:hover { background: var(--copper-deep); }
 
@@ -157,8 +167,8 @@ img { max-width: 100%; display: block; }
 /* ===== Hero ===== */
 .hero {
   text-align: center;
-  padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px) clamp(40px, 6vw, 70px);
-  background: linear-gradient(180deg, var(--peach-wash) 0%, var(--cream) 70%);
+  padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px) clamp(50px, 7vw, 80px);
+  background: var(--peach-bold);
 }
 .hero-rings { width: min(420px, 78%); margin: 0 auto 20px; }
 .hero-meta {
@@ -172,34 +182,38 @@ img { max-width: 100%; display: block; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--peach);
-  border: 1px solid rgba(192,106,77,0.25);
+  background: var(--cream);
+  border: 2px solid var(--copper-deep);
   color: var(--copper-deep);
   padding: 8px 18px;
   border-radius: 999px;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.92rem;
+  transform: rotate(-1.5deg);
 }
+.hero-meta .meta-chip:nth-child(2) { transform: rotate(1.5deg); border-color: var(--dusty-blue-deep); color: var(--dusty-blue-deep); }
 .hero-sub {
-  color: var(--copper);
-  font-size: 1rem;
+  color: var(--copper-deep);
+  font-weight: 500;
+  font-size: 1.05rem;
   margin: 0 0 26px;
 }
 
 .pill-btn {
   display: inline-block;
-  border: 1.5px solid var(--copper);
+  border: 2px solid var(--copper-deep);
   color: var(--copper-deep);
   text-decoration: none;
   padding: 12px 34px;
   border-radius: 999px;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.92rem;
-  background: transparent;
+  background: var(--cream);
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  box-shadow: 4px 4px 0 var(--dusty-blue-deep);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.pill-btn:hover { background: var(--copper); color: var(--cream); }
+.pill-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--dusty-blue-deep); }
 .pill-btn-add {
   display: block;
   width: 100%;
@@ -208,53 +222,55 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-body);
 }
 
-/* ===== Sections — toutes claires, juste des variations de chaleur ===== */
+/* ===== Sections — blocs de couleur francs ===== */
 .section {
   padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px);
 }
-.section-blue { background: var(--golden-wash); color: var(--ink); }
-.section-copper { background: var(--apricot-wash); color: var(--ink); }
+.section-blue { background: var(--dusty-blue-bold); color: var(--copper-deep); }
+.section-copper { background: var(--copper-bold); color: var(--cream); }
 .section-cream { background: var(--cream); color: var(--ink); }
-.section-peach { background: var(--peach-wash); color: var(--ink); }
+.section-peach { background: var(--blush-bold); color: var(--ink); }
 .section-center { text-align: center; }
 
 .section-title {
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-size: clamp(2.3rem, 5vw, 3.4rem);
   text-align: center;
   margin: 0 0 30px;
   color: var(--copper-deep);
 }
+.section-blue .section-title { color: var(--cream); }
+.section-copper .section-title { color: var(--cream); }
 .section-title-alt {
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
   text-align: center;
-  font-size: clamp(1.9rem, 4.2vw, 2.8rem);
+  font-size: clamp(2rem, 4.4vw, 3rem);
   line-height: 1.15;
-  color: var(--copper-deep);
+  color: var(--cream);
   margin: 0 0 50px;
 }
 
-/* ===== Programme — fond doré clair, la touche bleu vieilli vient des icônes ===== */
+/* ===== Programme — section bleu vieilli franche ===== */
 .programme-layout {
   max-width: var(--wrap);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto 2px 1fr;
+  grid-template-columns: auto 3px 1fr;
   gap: clamp(24px, 5vw, 60px);
   align-items: start;
 }
 .programme-date {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-size: clamp(2.6rem, 6vw, 3.8rem);
   line-height: 1.05;
-  color: var(--copper-deep);
+  color: var(--cream);
   white-space: nowrap;
 }
 .programme-line {
-  width: 2px;
-  background: var(--dusty-blue);
+  width: 3px;
+  background: var(--copper-bold);
   align-self: stretch;
 }
 .programme-timeline {
@@ -267,26 +283,31 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 20px;
 }
-.programme-icon { width: 56px; flex-shrink: 0; }
+.programme-icon {
+  width: 60px;
+  flex-shrink: 0;
+  background: var(--cream);
+  border-radius: 50%;
+  padding: 8px;
+  border: 2px solid var(--copper-deep);
+}
 .programme-time {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--copper-deep);
+  font-size: 1.35rem;
+  color: var(--cream);
   margin: 0 0 2px;
 }
 .programme-label {
-  font-size: 1.5rem;
-  color: var(--ink);
+  font-size: 1.55rem;
+  color: var(--copper-deep);
   margin: 0;
-  opacity: 0.95;
 }
 
 /* ===== Lieu ===== */
-#lieu.section { padding-bottom: clamp(40px, 6vw, 60px); }
-#faq.section { padding-top: clamp(30px, 5vw, 50px); }
 .lieu-address {
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
   color: var(--copper);
   margin: 0 0 20px;
   line-height: 1.6;
@@ -314,8 +335,10 @@ img { max-width: 100%; display: block; }
 .faq-content .section-title { text-align: left; margin-bottom: 30px; }
 .faq-item {
   margin-bottom: 26px;
-  padding-left: 18px;
-  border-left: 3px solid var(--dusty-blue);
+  padding: 16px 20px;
+  background: var(--cream);
+  border-radius: 12px;
+  border-left: 5px solid var(--dusty-blue-deep);
 }
 .faq-item h3 {
   font-family: var(--font-display);
@@ -327,11 +350,11 @@ img { max-width: 100%; display: block; }
 .faq-item p {
   font-size: 0.95rem;
   color: var(--ink);
-  opacity: 0.85;
+  opacity: 0.9;
   margin: 0;
 }
 
-/* ===== RSVP ===== */
+/* ===== RSVP — section copper franche ===== */
 .rsvp-layout {
   max-width: var(--wrap);
   margin: 0 auto;
@@ -350,16 +373,16 @@ img { max-width: 100%; display: block; }
 }
 .contact-label {
   font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--copper);
-  opacity: 0.9;
+  font-weight: 600;
+  color: var(--cream);
+  opacity: 0.85;
   margin: 0 0 4px;
 }
 .contact-value {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--copper-deep);
+  font-size: 1.2rem;
+  color: var(--cream);
   margin: 0;
 }
 .contact-email { text-transform: lowercase; font-size: 1rem; }
@@ -368,12 +391,13 @@ img { max-width: 100%; display: block; }
   background: var(--cream);
   padding: clamp(24px, 4vw, 40px);
   border-radius: var(--radius);
-  border: 1px solid rgba(192,106,77,0.15);
+  border: 3px solid var(--dusty-blue-deep);
+  box-shadow: 6px 6px 0 var(--dusty-blue-bold);
 }
 .form-row { margin-bottom: 18px; }
 .form-row label {
   display: block;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--copper-deep);
   margin-bottom: 6px;
   font-size: 0.85rem;
@@ -391,11 +415,17 @@ img { max-width: 100%; display: block; }
   width: 100%;
   padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(192,106,77,0.3);
+  border: 1.5px solid var(--dusty-blue-deep);
   background: #fff;
   font-family: var(--font-body);
   font-size: 1rem;
   color: var(--ink);
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--copper);
 }
 .form-row textarea { resize: vertical; }
 .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -404,7 +434,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 8px;
   background: #fff;
-  border: 1px solid rgba(192,106,77,0.3);
+  border: 1.5px solid var(--dusty-blue-deep);
   padding: 10px 16px;
   border-radius: 999px;
   font-weight: 500;
@@ -413,59 +443,60 @@ img { max-width: 100%; display: block; }
 }
 .btn-submit {
   width: 100%;
-  background: var(--copper);
+  background: var(--copper-deep);
   color: var(--cream);
   border: none;
   padding: 14px 30px;
   border-radius: 999px;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  box-shadow: 4px 4px 0 var(--dusty-blue-deep);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.btn-submit:hover { background: var(--copper-deep); }
-.btn-submit:disabled { opacity: 0.6; cursor: default; }
-.form-note { font-size: 0.85rem; color: var(--copper); text-align: center; }
+.btn-submit:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--dusty-blue-deep); }
+.btn-submit:disabled { opacity: 0.6; cursor: default; box-shadow: none; }
+.form-note { font-size: 0.85rem; color: var(--copper-deep); text-align: center; font-weight: 600; }
 
 /* ===== Guest cards / household suggestions ===== */
 .household-suggestions {
   background: #fff;
-  border: 1px solid rgba(192,106,77,0.25);
+  border: 1.5px solid var(--dusty-blue-deep);
   border-radius: 10px;
   padding: 16px;
   margin-bottom: 18px;
 }
 .household-suggestions p {
   margin: 0 0 12px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--copper-deep);
   font-size: 0.88rem;
 }
 .household-note { font-style: italic; color: var(--dusty-blue-deep); }
 .suggestion-chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .suggestion-chip {
-  background: var(--cream);
-  border: 1.5px solid var(--dusty-blue-deep);
+  background: var(--dusty-blue);
+  border: 2px solid var(--dusty-blue-deep);
   color: var(--copper-deep);
   padding: 8px 16px;
   border-radius: 999px;
   font-family: var(--font-body);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
-.suggestion-chip:hover { background: var(--dusty-blue); color: var(--copper-deep); }
+.suggestion-chip:hover { background: var(--dusty-blue-deep); color: #fff; }
 .suggestion-chip.added {
-  background: var(--dusty-blue-deep);
+  background: var(--copper-deep);
   color: #fff;
-  border-color: var(--dusty-blue-deep);
+  border-color: var(--copper-deep);
   cursor: default;
 }
 
 .guest-card {
   background: #fff;
-  border: 1px solid rgba(192,106,77,0.25);
+  border: 1.5px solid var(--dusty-blue-deep);
   border-radius: 10px;
   padding: 16px;
   margin-bottom: 14px;
@@ -479,7 +510,7 @@ img { max-width: 100%; display: block; }
 }
 .guest-card-header .form-row-split { flex: 1; margin-bottom: 0; }
 .guest-card-title {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   color: var(--copper-deep);
   margin: 0;
@@ -506,14 +537,14 @@ img { max-width: 100%; display: block; }
 
 /* ===== Footer ===== */
 .site-footer {
-  background: var(--golden-wash);
+  background: var(--footer-bold);
   text-align: center;
   padding: 50px 20px 60px;
 }
-.footer-illustration { max-width: 360px; margin: 0 auto 10px; }
+.footer-illustration { max-width: 380px; margin: 0 auto 10px; }
 .footer-script {
   color: var(--copper-deep);
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
   margin: 0;
 }
 
@@ -538,7 +569,7 @@ img { max-width: 100%; display: block; }
     align-items: flex-start;
     background: var(--cream);
     padding: 18px clamp(20px, 6vw, 64px) 24px;
-    border-bottom: 1px solid rgba(192,106,77,0.15);
+    border-bottom: 2px solid var(--dusty-blue-deep);
     display: none;
     gap: 16px;
   }
@@ -580,6 +611,10 @@ img { max-width: 100%; display: block; }
   <a href="#rsvp" class="pill-btn">RSVP</a>
 </header>
 
+<div class="wave-divider" style="color:var(--dusty-blue-bold)" aria-hidden="true">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
+</div>
+
 <!-- PROGRAMME -->
 <section class="section section-blue" id="programme">
   <h2 class="section-title-alt reveal">Nous avons hâte de célébrer<br>avec vous !</h2>
@@ -612,6 +647,10 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
+<div class="wave-divider flip" style="color:var(--golden-bold)" aria-hidden="true">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
+</div>
+
 <!-- LIEU -->
 <section class="section section-cream section-center" id="lieu">
   <h2 class="section-title script reveal">Rendez-vous au Manoir de Kerhuel</h2>
@@ -619,6 +658,10 @@ img { max-width: 100%; display: block; }
   <a href="https://www.google.com/maps/search/?api=1&query=Manoir+de+Kerhuel+Plouneour-Lanvern" class="pill-btn" target="_blank" rel="noopener">Voir sur Google Maps</a>
   <img src="manoir_kerhuel.png" alt="Illustration du Manoir de Kerhuel" class="chateau-illustration reveal">
 </section>
+
+<div class="wave-divider" style="color:var(--blush-bold)" aria-hidden="true">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
+</div>
 
 <!-- FAQ -->
 <section class="section section-peach" id="faq">
@@ -640,6 +683,10 @@ img { max-width: 100%; display: block; }
     </div>
   </div>
 </section>
+
+<div class="wave-divider flip" style="color:var(--copper-bold)" aria-hidden="true">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
+</div>
 
 <!-- RSVP -->
 <section class="section section-copper" id="rsvp">
@@ -698,6 +745,10 @@ img { max-width: 100%; display: block; }
     <iframe name="hiddenRsvpFrame" id="hiddenRsvpFrame" style="display:none"></iframe>
   </div>
 </section>
+
+<div class="wave-divider" style="color:var(--footer-bold)" aria-hidden="true">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
+</div>
 
 <!-- SLIDE FINALE -->
 <footer class="site-footer" id="footer">
