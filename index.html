@@ -8,576 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ===== Tokens — version punchy, plus de bleu vieilli, blocs de couleur francs ===== */
-:root {
-  --cream: #FFFBF4;
-
-  --peach-bold: #F7CDA6;
-  --golden-bold: #F0BE7C;
-  --blush-bold: #EFC2B6;
-  --copper-bold: #C4694A;
-  --footer-bold: #F0BE7C;
-
-  --peach-wash: #FBEADC;
-
-  --ink: #6B4030;
-  --copper: #C06A4D;
-  --copper-deep: #8C4530;
-  --peach: #F4C7A7;
-
-  --dusty-blue: #A8C2D9;
-  --dusty-blue-bold: #8FB2CF;
-  --dusty-blue-deep: #5F86A6;
-
-  --font-script: 'Caveat', cursive;
-  --font-display: 'Fraunces', serif;
-  --font-body: 'Jost', sans-serif;
-
-  --radius: 14px;
-  --wrap: 1080px;
-}
-
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-
-img { max-width: 100%; display: block; }
-.script { font-family: var(--font-script); font-weight: 700; }
-
-/* ===== Scroll progress wave ===== */
-.scroll-wave {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 5px;
-  z-index: 200;
-  overflow: hidden;
-}
-.scroll-wave svg { width: 100%; height: 100%; }
-.scroll-wave path {
-  fill: none;
-  stroke: var(--dusty-blue-deep);
-  stroke-width: 6;
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  transition: stroke-dashoffset 0.1s linear;
-}
-
-/* ===== Séparateurs en vague entre sections ===== */
-.wave-divider { line-height: 0; }
-.wave-divider svg { width: 100%; height: 50px; display: block; }
-.wave-divider path { fill: currentColor; }
-.wave-divider.flip { transform: rotate(180deg); }
-
-/* ===== Animations d'entrée ===== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.hero-rings { animation: fadeInUp 0.8s ease both; }
-.hero-meta { animation: fadeInUp 0.8s ease 0.15s both; }
-.hero-sub { animation: fadeInUp 0.8s ease 0.3s both; }
-.hero > .pill-btn { animation: fadeInUp 0.8s ease 0.45s both; }
-
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-.reveal-stagger:nth-child(2) { transition-delay: 0.1s; }
-.reveal-stagger:nth-child(3) { transition-delay: 0.2s; }
-.reveal-stagger:nth-child(4) { transition-delay: 0.3s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-rings, .hero-meta, .hero-sub, .hero > .pill-btn { animation: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
-
-/* ===== Nav ===== */
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px clamp(20px, 5vw, 56px);
-  background: rgba(255, 251, 244, 0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 2px solid var(--dusty-blue-deep);
-}
-.nav-mark {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: var(--copper-deep);
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: clamp(14px, 2.5vw, 32px);
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-.nav-links a {
-  text-decoration: none;
-  color: var(--copper-deep);
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: color 0.2s ease;
-}
-.nav-links a:hover { color: var(--dusty-blue-deep); }
-.nav-cta {
-  background: var(--dusty-blue-deep);
-  color: #fff !important;
-  padding: 8px 20px;
-  border-radius: 999px;
-  font-weight: 700;
-  box-shadow: 3px 3px 0 var(--copper-bold);
-}
-.nav-cta:hover { background: var(--copper-deep); }
-
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-}
-.nav-toggle span {
-  width: 22px;
-  height: 2px;
-  background: var(--copper-deep);
-  border-radius: 2px;
-}
-
-/* ===== Hero ===== */
-.hero {
-  text-align: center;
-  padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px) clamp(50px, 7vw, 80px);
-  background: var(--peach-bold);
-}
-.hero-rings { width: min(420px, 78%); margin: 0 auto 20px; }
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 18px;
-}
-.meta-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--cream);
-  border: 2px solid var(--copper-deep);
-  color: var(--copper-deep);
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.92rem;
-  transform: rotate(-1.5deg);
-}
-.hero-meta .meta-chip:nth-child(2) { transform: rotate(1.5deg); border-color: var(--dusty-blue-deep); color: var(--dusty-blue-deep); }
-.hero-sub {
-  color: var(--copper-deep);
-  font-weight: 500;
-  font-size: 1.05rem;
-  margin: 0 0 26px;
-}
-
-.pill-btn {
-  display: inline-block;
-  border: 2px solid var(--copper-deep);
-  color: var(--copper-deep);
-  text-decoration: none;
-  padding: 12px 34px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.92rem;
-  background: var(--cream);
-  cursor: pointer;
-  box-shadow: 4px 4px 0 var(--dusty-blue-deep);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.pill-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--dusty-blue-deep); }
-.pill-btn-add {
-  display: block;
-  width: 100%;
-  text-align: center;
-  margin: 4px 0 20px;
-  font-family: var(--font-body);
-}
-
-/* ===== Sections — blocs de couleur francs ===== */
-.section {
-  padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px);
-}
-.section-blue { background: var(--dusty-blue-bold); color: var(--copper-deep); }
-.section-copper { background: var(--copper-bold); color: var(--cream); }
-.section-cream { background: var(--cream); color: var(--ink); }
-.section-peach { background: var(--blush-bold); color: var(--ink); }
-.section-center { text-align: center; }
-
-.section-title {
-  font-size: clamp(2.3rem, 5vw, 3.4rem);
-  text-align: center;
-  margin: 0 0 30px;
-  color: var(--copper-deep);
-}
-.section-blue .section-title { color: var(--cream); }
-.section-copper .section-title { color: var(--cream); }
-.section-title-alt {
-  font-family: var(--font-display);
-  font-weight: 900;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: clamp(2rem, 4.4vw, 3rem);
-  line-height: 1.15;
-  color: var(--cream);
-  margin: 0 0 50px;
-}
-
-/* ===== Programme — section bleu vieilli franche ===== */
-.programme-layout {
-  max-width: var(--wrap);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto 3px 1fr;
-  gap: clamp(24px, 5vw, 60px);
-  align-items: start;
-}
-.programme-date {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.6rem, 6vw, 3.8rem);
-  line-height: 1.05;
-  color: var(--cream);
-  white-space: nowrap;
-}
-.programme-line {
-  width: 3px;
-  background: var(--copper-bold);
-  align-self: stretch;
-}
-.programme-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-}
-.programme-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.programme-icon {
-  width: 60px;
-  flex-shrink: 0;
-  background: var(--cream);
-  border-radius: 50%;
-  padding: 8px;
-  border: 2px solid var(--copper-deep);
-}
-.programme-time {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.35rem;
-  color: var(--cream);
-  margin: 0 0 2px;
-}
-.programme-label {
-  font-size: 1.55rem;
-  color: var(--copper-deep);
-  margin: 0;
-}
-
-/* ===== Lieu ===== */
-.lieu-address {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--copper);
-  margin: 0 0 20px;
-  line-height: 1.6;
-}
-.chateau-illustration {
-  max-width: 440px;
-  width: 100%;
-  margin: 30px auto 0;
-}
-
-/* ===== FAQ ===== */
-.faq-layout {
-  max-width: var(--wrap);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: clamp(30px, 5vw, 70px);
-  align-items: start;
-}
-.faq-layout-solo {
-  grid-template-columns: 1fr;
-  max-width: 720px;
-}
-.faq-layout-solo .faq-content .section-title { text-align: center; }
-.faq-content .section-title { text-align: left; margin-bottom: 30px; }
-.faq-item {
-  margin-bottom: 26px;
-  padding: 16px 20px;
-  background: var(--cream);
-  border-radius: 12px;
-  border-left: 5px solid var(--dusty-blue-deep);
-}
-.faq-item h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--copper-deep);
-  margin: 0 0 10px;
-}
-.faq-item p {
-  font-size: 0.95rem;
-  color: var(--ink);
-  opacity: 0.9;
-  margin: 0;
-}
-
-/* ===== RSVP — section copper franche ===== */
-.rsvp-layout {
-  max-width: var(--wrap);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(30px, 5vw, 60px);
-  align-items: start;
-}
-.rsvp-side { text-align: center; }
-.rsvp-illustration { max-width: 360px; margin: 0 auto 30px; }
-.rsvp-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
-}
-.contact-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--cream);
-  opacity: 0.85;
-  margin: 0 0 4px;
-}
-.contact-value {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--cream);
-  margin: 0;
-}
-.contact-email { text-transform: lowercase; font-size: 1rem; }
-
-.rsvp-form {
-  background: var(--cream);
-  padding: clamp(24px, 4vw, 40px);
-  border-radius: var(--radius);
-  border: 3px solid var(--dusty-blue-deep);
-  box-shadow: 6px 6px 0 var(--dusty-blue-bold);
-}
-.form-row { margin-bottom: 18px; }
-.form-row label {
-  display: block;
-  font-weight: 600;
-  color: var(--copper-deep);
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-}
-.form-row-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.form-row input[type="text"],
-.form-row input[type="email"],
-.form-row input[type="number"],
-.form-row textarea,
-.form-row select {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1.5px solid var(--dusty-blue-deep);
-  background: #fff;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--ink);
-}
-.form-row input:focus,
-.form-row select:focus,
-.form-row textarea:focus {
-  outline: none;
-  border-color: var(--copper);
-}
-.form-row textarea { resize: vertical; }
-.radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
-.radio-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  border: 1.5px solid var(--dusty-blue-deep);
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-.btn-submit {
-  width: 100%;
-  background: var(--copper-deep);
-  color: var(--cream);
-  border: none;
-  padding: 14px 30px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  box-shadow: 4px 4px 0 var(--dusty-blue-deep);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.btn-submit:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--dusty-blue-deep); }
-.btn-submit:disabled { opacity: 0.6; cursor: default; box-shadow: none; }
-.form-note { font-size: 0.85rem; color: var(--copper-deep); text-align: center; font-weight: 600; }
-
-/* ===== Guest cards / household suggestions ===== */
-.household-suggestions {
-  background: #fff;
-  border: 1.5px solid var(--dusty-blue-deep);
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 18px;
-}
-.household-suggestions p {
-  margin: 0 0 12px;
-  font-weight: 600;
-  color: var(--copper-deep);
-  font-size: 0.88rem;
-}
-.household-note { font-style: italic; color: var(--dusty-blue-deep); }
-.suggestion-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-.suggestion-chip {
-  background: var(--dusty-blue);
-  border: 2px solid var(--dusty-blue-deep);
-  color: var(--copper-deep);
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.suggestion-chip:hover { background: var(--dusty-blue-deep); color: #fff; }
-.suggestion-chip.added {
-  background: var(--copper-deep);
-  color: #fff;
-  border-color: var(--copper-deep);
-  cursor: default;
-}
-
-.guest-card {
-  background: #fff;
-  border: 1.5px solid var(--dusty-blue-deep);
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 14px;
-}
-.guest-card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 6px;
-}
-.guest-card-header .form-row-split { flex: 1; margin-bottom: 0; }
-.guest-card-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--copper-deep);
-  margin: 0;
-}
-.guest-card-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 10px;
-}
-@media (max-width: 560px) {
-  .guest-card-grid { grid-template-columns: 1fr; }
-}
-.remove-guest-btn {
-  background: none;
-  border: none;
-  color: var(--copper);
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 4px 6px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-.remove-guest-btn:hover { color: var(--copper-deep); }
-
-/* ===== Footer ===== */
-.site-footer {
-  background: var(--footer-bold);
-  text-align: center;
-  padding: 50px 20px 60px;
-}
-.footer-illustration { max-width: 380px; margin: 0 auto 10px; }
-.footer-script {
-  color: var(--copper-deep);
-  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
-  margin: 0;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 860px) {
-  .programme-layout { grid-template-columns: 1fr; }
-  .programme-line { display: none; }
-  .programme-date { text-align: center; }
-  .faq-layout { grid-template-columns: 1fr; }
-  .faq-photo { max-width: 320px; margin: 0 auto; }
-  .rsvp-layout { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 720px) {
-  .nav-toggle { display: flex; }
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    background: var(--cream);
-    padding: 18px clamp(20px, 6vw, 64px) 24px;
-    border-bottom: 2px solid var(--dusty-blue-deep);
-    display: none;
-    gap: 16px;
-  }
-  .nav-links.open { display: flex; }
-  .nav-cta { align-self: flex-start; }
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -602,7 +33,7 @@ img { max-width: 100%; display: block; }
 
 <!-- HERO -->
 <header class="hero" id="hero">
-  <img src="icon_rings.png" alt="Camille & Joséphine" class="hero-rings reveal" aria-hidden="true">
+  <img src="icon_rings.png" alt="Camille & Joséphine" class="hero-rings" aria-hidden="true">
   <div class="hero-meta">
     <span class="meta-chip">📅 6 mai 2027</span>
     <span class="meta-chip">📍 Finistère sud</span>
@@ -610,10 +41,6 @@ img { max-width: 100%; display: block; }
   <p class="hero-sub">Célébrez notre union à nos côtés !</p>
   <a href="#rsvp" class="pill-btn">RSVP</a>
 </header>
-
-<div class="wave-divider" style="color:var(--dusty-blue-bold)" aria-hidden="true">
-  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
-</div>
 
 <!-- PROGRAMME -->
 <section class="section section-blue" id="programme">
@@ -623,7 +50,7 @@ img { max-width: 100%; display: block; }
     <div class="programme-line" aria-hidden="true"></div>
     <div class="programme-timeline">
       <div class="programme-row reveal reveal-stagger">
-        <img src="icon_rings.png" alt="" class="programme-icon" aria-hidden="true">
+        <img src="icon_rings2.png" alt="" class="programme-icon" aria-hidden="true">
         <div>
           <p class="programme-time">15h00</p>
           <p class="programme-label script">Cérémonie laïque</p>
@@ -647,10 +74,6 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<div class="wave-divider flip" style="color:var(--golden-bold)" aria-hidden="true">
-  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
-</div>
-
 <!-- LIEU -->
 <section class="section section-cream section-center" id="lieu">
   <h2 class="section-title script reveal">Rendez-vous au Manoir de Kerhuel</h2>
@@ -659,12 +82,8 @@ img { max-width: 100%; display: block; }
   <img src="manoir_kerhuel.png" alt="Illustration du Manoir de Kerhuel" class="chateau-illustration reveal">
 </section>
 
-<div class="wave-divider" style="color:var(--blush-bold)" aria-hidden="true">
-  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
-</div>
-
 <!-- FAQ -->
-<section class="section section-peach" id="faq">
+<section class="section section-cream" id="faq">
   <div class="faq-layout faq-layout-solo">
     <div class="faq-content reveal">
       <h2 class="section-title script">Petite FAQ</h2>
@@ -684,12 +103,8 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<div class="wave-divider flip" style="color:var(--copper-bold)" aria-hidden="true">
-  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
-</div>
-
 <!-- RSVP -->
-<section class="section section-copper" id="rsvp">
+<section class="section section-blue" id="rsvp">
   <h2 class="section-title script">RSVP d'ici le 31 janvier 2027</h2>
   <div class="rsvp-layout">
     <div class="rsvp-side reveal">
@@ -736,7 +151,7 @@ img { max-width: 100%; display: block; }
       <div id="addedGuestsContainer"></div>
       <button type="button" id="addManualGuestBtn" class="pill-btn pill-btn-add">+ Ajouter un convive</button>
       <div class="form-row">
-        <label for="message">Un petit mot ?</label>
+        <label for="message">Une allergie à signaler ?</label>
         <textarea id="message" name="message" rows="3" placeholder="Facultatif"></textarea>
       </div>
       <button type="submit" class="btn-submit">Envoyer ma réponse</button>
@@ -746,10 +161,6 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<div class="wave-divider" style="color:var(--footer-bold)" aria-hidden="true">
-  <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C 200,60 400,0 600,30 C 800,60 1000,0 1200,30 L1200,60 L0,60 Z"/></svg>
-</div>
-
 <!-- SLIDE FINALE -->
 <footer class="site-footer" id="footer">
   <img src="blob_illustration.png" alt="" class="footer-illustration reveal" aria-hidden="true">
@@ -757,6 +168,6 @@ img { max-width: 100%; display: block; }
 </footer>
 
 
-
+<script src="script_v8.js"></script>
 </body>
 </html>
