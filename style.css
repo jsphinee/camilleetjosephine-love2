@@ -352,7 +352,7 @@ img { max-width: 100%; display: block; }
 .contact-email { text-transform: lowercase; font-size: 1rem; }
 
 .rsvp-form {
-  background: #fff;
+  background: var(--cream-soft);
   padding: clamp(24px, 4vw, 40px);
   border-radius: var(--radius);
   border: 2.5px solid var(--navy);
