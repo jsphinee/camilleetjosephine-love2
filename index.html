@@ -7,7 +7,7 @@
 <meta name="description" content="Le mariage de Camille et Joséphine, le 6 mai 2027 en Pays Bigouden, Finistère.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Mrs+Saint+Delafield&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,10 +33,15 @@
 
 <!-- HERO -->
 <header class="hero" id="hero">
-  <img src="icon_rings.png" alt="Camille & Joséphine" class="hero-rings" aria-hidden="true">
+  <img src="couple_illustration.png" alt="Camille et Joséphine" class="hero-illustration reveal">
+  <div class="hero-badge">
+    <p class="hero-title">On se marie !</p>
+    <p class="hero-names script">Camille &amp; Joséphine</p>
+  </div>
   <div class="hero-meta">
-    <span class="meta-chip">📅 6 mai 2027</span>
-    <span class="meta-chip">📍 Finistère sud</span>
+    <span class="meta-chip">6 mai 2027</span>
+    <span class="meta-chip">·</span>
+    <span class="meta-chip">Finistère sud</span>
   </div>
   <p class="hero-sub">Célébrez notre union à nos côtés !</p>
   <a href="#rsvp" class="pill-btn">RSVP</a>
@@ -46,11 +51,11 @@
 <section class="section section-blue" id="programme">
   <h2 class="section-title-alt reveal">Nous avons hâte de célébrer<br>avec vous !</h2>
   <div class="programme-layout">
-    <div class="programme-date reveal">06<br>mai<br>2027</div>
+    <div class="programme-date reveal">06 mai<br>2027</div>
     <div class="programme-line" aria-hidden="true"></div>
     <div class="programme-timeline">
       <div class="programme-row reveal reveal-stagger">
-        <img src="icon_rings2.png" alt="" class="programme-icon" aria-hidden="true">
+        <img src="icon_rings.png" alt="" class="programme-icon" aria-hidden="true">
         <div>
           <p class="programme-time">15h00</p>
           <p class="programme-label script">Cérémonie laïque</p>
@@ -83,7 +88,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="section section-cream" id="faq">
+<section class="section section-peach" id="faq">
   <div class="faq-layout faq-layout-solo">
     <div class="faq-content reveal">
       <h2 class="section-title script">Petite FAQ</h2>
@@ -104,18 +109,18 @@
 </section>
 
 <!-- RSVP -->
-<section class="section section-blue" id="rsvp">
+<section class="section section-copper" id="rsvp">
   <h2 class="section-title script">RSVP d'ici le 31 janvier 2027</h2>
   <div class="rsvp-layout">
     <div class="rsvp-side reveal">
       <img src="corner_toast.png" alt="" class="rsvp-illustration" aria-hidden="true">
       <div class="rsvp-contacts">
         <div>
-          <p class="contact-label">Téléphone Joséphine :</p>
+          <p class="contact-label">Téléphone Joséphine</p>
           <p class="contact-value">+33 6 66 06 59 92</p>
         </div>
         <div>
-          <p class="contact-label">Téléphone Camille :</p>
+          <p class="contact-label">Téléphone Camille</p>
           <p class="contact-value">+33 6 30 34 91 83</p>
         </div>
         <div>
@@ -151,7 +156,7 @@
       <div id="addedGuestsContainer"></div>
       <button type="button" id="addManualGuestBtn" class="pill-btn pill-btn-add">+ Ajouter un convive</button>
       <div class="form-row">
-        <label for="message">Une allergie à signaler ?</label>
+        <label for="message">Un petit mot ?</label>
         <textarea id="message" name="message" rows="3" placeholder="Facultatif"></textarea>
       </div>
       <button type="submit" class="btn-submit">Envoyer ma réponse</button>
