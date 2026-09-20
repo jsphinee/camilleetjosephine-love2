@@ -288,6 +288,21 @@ img { max-width: 100%; display: block; }
   width: 100%;
   margin: 30px auto 0;
 }
+.title-swoosh {
+  width: 90px;
+  margin: -10px auto 20px;
+  opacity: 0.8;
+}
+.title-swoosh-light { opacity: 0.8; }
+.lieu-cake {
+  max-width: 160px;
+  margin: 24px auto 0;
+}
+.contacts-accent {
+  width: 110px;
+  margin: 0 auto 6px;
+  opacity: 0.85;
+}
 
 /* ===== FAQ ===== */
 .faq-layout {
