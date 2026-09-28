@@ -275,6 +275,19 @@ img { max-width: 100%; display: block; }
   margin: 0;
 }
 
+/* ===== Petits accents décoratifs (squiggles, rubans, icônes) ===== */
+.title-swoosh {
+  max-width: 130px;
+  width: 100%;
+  margin: 0 auto 24px;
+}
+.title-swoosh-light { opacity: 0.85; }
+.contacts-accent {
+  max-width: 70px;
+  width: 100%;
+  margin: 0 auto 4px;
+}
+
 /* ===== Lieu ===== */
 .lieu-address {
   font-size: 1.05rem;
@@ -282,6 +295,11 @@ img { max-width: 100%; display: block; }
   color: var(--navy-soft);
   margin: 0 0 20px;
   line-height: 1.6;
+}
+.lieu-cake {
+  max-width: 90px;
+  width: 100%;
+  margin: 24px auto 0;
 }
 .chateau-illustration {
   max-width: 400px;
