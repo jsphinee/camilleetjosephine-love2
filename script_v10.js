@@ -90,7 +90,7 @@ function reponseControlHtml(prefix, invitedToBrunch) {
     </div>
     ${invitedToBrunch ? `
     <div class="form-row ${prefix}-brunch-wrapper" hidden>
-      <label>Présent(e) au retinton ?</label>
+      <label>Présent(e) au retinton breton ?</label>
       <select class="${prefix}-brunch">
         <option value="" selected disabled>— Choisir —</option>
         <option value="Oui">Oui</option>
