@@ -27,7 +27,6 @@
     <li><a href="#programme">Programme</a></li>
     <li><a href="#lieu">Le lieu</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#chambre">Ma chambre</a></li>
     <li><a href="#cagnotte">Cagnotte</a></li>
     <li><a href="#rsvp" class="nav-cta">RSVP</a></li>
   </ul>
@@ -113,27 +112,6 @@
   </div>
 </section>
 
-<!-- MA CHAMBRE -->
-<section class="section section-cream section-center" id="chambre">
-  <h2 class="section-title script">Ma chambre</h2>
-  <img src="illus_squiggle_1.png" alt="" class="title-swoosh" aria-hidden="true">
-  <p class="chambre-intro">Vous dormez au manoir ? Entrez votre nom pour retrouver votre chambre, les horaires et les modalités de réservation. Si votre chambre n'est pas encore confirmée, nous reviendrons vers vous très vite.</p>
-  <form class="rsvp-form chambre-form" id="chambreForm" data-script-url="https://script.google.com/macros/s/AKfycbzsA7LqtNgeVARegu2QRd6Scg-qLOKpdwNMJPizaFgT8z1ui_fiqYapQ03cFeG8Y9nVRA/exec" novalidate>
-    <div class="form-row form-row-split">
-      <div>
-        <label for="chambre_firstname">Prénom</label>
-        <input type="text" id="chambre_firstname" autocomplete="given-name" required>
-      </div>
-      <div>
-        <label for="chambre_lastname">Nom</label>
-        <input type="text" id="chambre_lastname" autocomplete="family-name" required>
-      </div>
-    </div>
-    <button type="submit" class="pill-btn" id="chambreBtn">Voir ma chambre</button>
-  </form>
-  <div class="chambre-result" id="chambreResult" aria-live="polite" hidden></div>
-</section>
-
 <!-- CAGNOTTE -->
 <section class="section section-cream section-center" id="cagnotte">
   <h2 class="section-title script reveal">Notre cagnotte</h2>
@@ -176,6 +154,7 @@
         </div>
       </div>
       <div id="householdSuggestions" class="household-suggestions" hidden></div>
+      <div id="chambreResult" class="chambre-result" aria-live="polite" hidden></div>
       <div class="form-row">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
@@ -209,6 +188,6 @@
 
 
 <script src="script_v10.js"></script>
-<script src="chambre_v1.js"></script>
+<script src="chambre_v2.js"></script>
 </body>
 </html>
