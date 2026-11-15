@@ -1,20 +1,20 @@
-// "Ma chambre" : interroge le script Google (action=room, JSONP comme la recherche de foyer du RSVP).
+// Chambre : une fois le prénom et le nom saisis dans le formulaire RSVP, affiche la chambre
+// uniquement si elle est confirmée (🔒) dans l'onglet "Chambres". Sinon, rien n'apparaît.
 (function () {
-  const form = document.getElementById('chambreForm');
-  if (!form) return;
+  const fn = document.getElementById('contact_firstname');
+  const ln = document.getElementById('contact_lastname');
+  const rsvp = document.getElementById('rsvpForm');
   const box = document.getElementById('chambreResult');
-  const btn = document.getElementById('chambreBtn');
-  const scriptURL = form.dataset.scriptUrl;
+  if (!fn || !ln || !rsvp || !box) return;
+  const scriptURL = rsvp.dataset.scriptUrl;
+  let lastKey = '', seq = 0;
 
   function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-  function message(text) { box.innerHTML = ''; box.appendChild(el('p', 'chambre-msg', text)); box.hidden = false; }
   function row(list, label, value) { const li = el('li'); li.appendChild(el('b', null, label)); li.appendChild(el('span', null, value)); list.appendChild(li); }
+  function hide() { box.innerHTML = ''; box.hidden = true; }
 
   function render(d) {
-    btn.disabled = false; btn.textContent = 'Voir ma chambre';
-    if (!d || d.found === false) { message("Nous n'avons pas retrouvé ce nom sur notre liste. Vérifiez l'orthographe, ou écrivez-nous : nous vous répondrons vite !"); return; }
-    if (d.status === 'pending') { message('Merci ' + d.prenom + " ! Votre chambre n'est pas encore confirmée : nous revenons vers vous dès que c'est fait."); return; }
-    if (d.status !== 'confirmed') { message('Merci ' + d.prenom + " ! Nous n'avons pas de chambre à vous indiquer pour le moment. Si vous pensez que c'est une erreur, écrivez-nous."); return; }
+        if (!d || d.found === false || d.status !== 'confirmed') { box.innerHTML = ''; box.hidden = true; return; }
     box.innerHTML = '';
     const card = el('div', 'chambre-card');
     card.appendChild(el('h3', null, d.dorm ? 'Le dortoir' : d.room));
@@ -34,19 +34,23 @@
     box.appendChild(card); box.hidden = false;
   }
 
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    const prenom = document.getElementById('chambre_firstname').value.trim();
-    const nom = document.getElementById('chambre_lastname').value.trim();
-    if (!prenom || !nom) { message('Merci de renseigner votre prénom et votre nom.'); return; }
-    btn.disabled = true; btn.textContent = 'Recherche…';
-    message('Recherche de votre chambre… (cela peut prendre quelques secondes)');
-    const cb = 'roomCb_' + Date.now();
+
+  function lookup() {
+    const prenom = fn.value.trim(), nom = ln.value.trim();
+    if (!prenom || !nom || !scriptURL) { lastKey = ''; hide(); return; }
+    const key = prenom.toLowerCase() + '|' + nom.toLowerCase();
+    if (key === lastKey) return;
+    lastKey = key; hide();
+    const my = ++seq, cb = 'roomCb_' + Date.now();
     const tag = document.createElement('script');
-    const timer = setTimeout(function () { delete window[cb]; tag.remove(); btn.disabled = false; btn.textContent = 'Voir ma chambre'; message('Le service ne répond pas pour le moment, merci de réessayer dans un instant.'); }, 25000);
-    window[cb] = function (data) { clearTimeout(timer); delete window[cb]; tag.remove(); render(data); };
+    const done = function () { delete window[cb]; tag.remove(); };
+    window[cb] = function (data) { done(); if (my === seq) render(data); };
     tag.src = scriptURL + '?' + new URLSearchParams({ action: 'room', prenom: prenom, nom: nom, callback: cb }).toString();
-    tag.onerror = function () { clearTimeout(timer); delete window[cb]; btn.disabled = false; btn.textContent = 'Voir ma chambre'; message('Impossible de joindre le service, merci de réessayer.'); };
+    tag.onerror = function () { done(); lastKey = ''; };
     document.body.appendChild(tag);
-  });
+  }
+  fn.addEventListener('blur', lookup);
+  ln.addEventListener('blur', lookup);
+  fn.addEventListener('input', function () { seq++; lastKey = ''; hide(); });
+  ln.addEventListener('input', function () { seq++; lastKey = ''; hide(); });
 })();
