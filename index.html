@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Caveat:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 
@@ -27,6 +27,7 @@
     <li><a href="#programme">Programme</a></li>
     <li><a href="#lieu">Le lieu</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="#chambre">Ma chambre</a></li>
     <li><a href="#cagnotte">Cagnotte</a></li>
     <li><a href="#rsvp" class="nav-cta">RSVP</a></li>
   </ul>
@@ -55,7 +56,7 @@
       <div class="programme-row reveal reveal-stagger">
         <img src="icon_rings.png" alt="" class="programme-icon" aria-hidden="true">
         <div>
-          <p class="programme-time">15h30</p>
+          <p class="programme-time">15h00</p>
           <p class="programme-label script">Cérémonie laïque</p>
         </div>
       </div>
@@ -69,7 +70,7 @@
       <div class="programme-row reveal reveal-stagger">
         <img src="illus_disco_ball.png" alt="" class="programme-icon" aria-hidden="true">
         <div>
-          <p class="programme-time">20h00</p>
+          <p class="programme-time">19h00</p>
           <p class="programme-label script">Dîner &amp; soirée</p>
         </div>
       </div>
@@ -81,7 +82,7 @@
 <section class="section section-cream section-center" id="lieu">
   <h2 class="section-title script reveal">Rendez-vous au Manoir de Kerhuel</h2>
   <img src="illus_squiggle_1.png" alt="" class="title-swoosh reveal" aria-hidden="true">
-  <p class="lieu-address">Route de Quimper<br>29720 Plonéour-Lanvern</p>
+  <p class="lieu-address">Route de Quimper<br>29720 Plounéour-Lanvern</p>
   <a href="https://www.google.com/maps/search/?api=1&query=Manoir+de+Kerhuel+Plouneour-Lanvern" class="pill-btn" target="_blank" rel="noopener">Voir sur Google Maps</a>
   <img src="manoir_kerhuel.png" alt="Illustration du Manoir de Kerhuel" class="chateau-illustration reveal">
 </section>
@@ -97,19 +98,36 @@
         <p>Oui — du moins nous l'espérons ! Nous comptons sur la clémence du temps breton pour ce weekend de l'Ascension pour nous offrir du soleil... cependant, si la météo n'est pas de notre côté, le manoir prévoit un plan B afin que nous ne finissions pas trempés...</p>
       </div>
       <div class="faq-item">
+        <h3>Le mariage est-il "kids friendly" ?</h3>
+        <p>Oui ! Des baby-sitters seront là pour occuper nos chères petites têtes blondes, et une pièce leur sera entièrement dédiée afin qu'ils puissent vivre le mariage à leur rythme.</p>
+      </div>
+      <div class="faq-item">
         <h3>Est-il facile de se garer ?</h3>
         <p>Oui ! Le manoir dispose d'un parking privé qui pourra sans problème accueillir tous les véhicules de nos invités.</p>
       </div>
-        <div class="faq-item">
-        <h3>Et la mairie ?</h3>
-        <p>Nous nous marierons civilement en petit comité, avant le jour J.</p>
-      </div>
-        <div class="faq-item">
-        <h3>Pour nos amis militaires</h3>
-        <p>Nous serions très heureux de vous voir porter l'uniforme pour la cérémonie et le cocktail qui suivra.</p>
-      </div>
     </div>
   </div>
+</section>
+
+<!-- MA CHAMBRE -->
+<section class="section section-cream section-center" id="chambre">
+  <h2 class="section-title script">Ma chambre</h2>
+  <img src="illus_squiggle_1.png" alt="" class="title-swoosh" aria-hidden="true">
+  <p class="chambre-intro">Vous dormez au manoir ? Entrez votre nom pour retrouver votre chambre, les horaires et les modalités de réservation. Si votre chambre n'est pas encore confirmée, nous reviendrons vers vous très vite.</p>
+  <form class="rsvp-form chambre-form" id="chambreForm" data-script-url="https://script.google.com/macros/s/AKfycbzsA7LqtNgeVARegu2QRd6Scg-qLOKpdwNMJPizaFgT8z1ui_fiqYapQ03cFeG8Y9nVRA/exec" novalidate>
+    <div class="form-row form-row-split">
+      <div>
+        <label for="chambre_firstname">Prénom</label>
+        <input type="text" id="chambre_firstname" autocomplete="given-name" required>
+      </div>
+      <div>
+        <label for="chambre_lastname">Nom</label>
+        <input type="text" id="chambre_lastname" autocomplete="family-name" required>
+      </div>
+    </div>
+    <button type="submit" class="pill-btn" id="chambreBtn">Voir ma chambre</button>
+  </form>
+  <div class="chambre-result" id="chambreResult" aria-live="polite" hidden></div>
 </section>
 
 <!-- CAGNOTTE -->
@@ -186,6 +204,7 @@
 </footer>
 
 
-<script src="script_v10.js"></script>
+<script src="script_v11.js"></script>
+<script src="chambre_v1.js"></script>
 </body>
 </html>
