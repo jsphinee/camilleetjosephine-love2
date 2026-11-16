@@ -170,9 +170,10 @@
       <div id="addedGuestsContainer"></div>
       <button type="button" id="addManualGuestBtn" class="pill-btn pill-btn-add">+ Ajouter un convive</button>
       <div class="form-row">
-        <label for="message">Des allergies ?</label>
+        <label for="message">Un petit mot ?</label>
         <textarea id="message" name="message" rows="3" placeholder="Facultatif"></textarea>
       </div>
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><label for="website">Ne pas remplir</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
       <button type="submit" class="btn-submit">Envoyer ma réponse</button>
       <p class="form-note" id="formNote"></p>
     </form>
